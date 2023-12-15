@@ -1,0 +1,50 @@
+name: API Tests
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        build_type: [Release]
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install Catch 2 (ubuntu-latest)
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        git clone https://github.com/catchorg/Catch2.git
+        cd Catch2
+        cmake -Bbuild
+        cmake --build build
+        sudo cmake --install build
+
+    - name: Install Catch 2 (macos-latest)
+      if: matrix.os == 'macos-latest'
+      run: |
+        git clone https://github.com/catchorg/Catch2.git
+        cd Catch2
+        cmake -Bbuild
+        cmake --build build
+        sudo cmake --install build
+
+    - name: Configure and Build Examples
+      run: |
+        cd "tools/testing"
+        mkdir -p build && cd build
+        cmake ..
+        cmake --build .
+        cd ${{ github.workspace }}
+
+    - name: Test
+      run: |
+        cd "tools/testing/build"
+        ./tests
