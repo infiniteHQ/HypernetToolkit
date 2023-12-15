@@ -3,7 +3,7 @@ Hypernet Tookit
 *Please note the project is still a work in progress; contents are subject to changes. More contents, supports & updates comming !*
 
 
-![API Tests](https://github.com/infiniteHQ/Vortex/actions/workflows/API_Tests.yml/badge.svg)
+![API Tests](https://github.com/infiniteHQ/HypernetToolkit/actions/workflows/API_Tests.yml/badge.svg)
 
 
 ### What is Hypernet ?
