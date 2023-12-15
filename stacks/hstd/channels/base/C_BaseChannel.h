@@ -15,28 +15,14 @@ namespace HToolkit {
 namespace hstd {
 namespace Channels {
 
-
-
-/*
-
-Donc ça c'est un channel de base, on peut fair un peu tout ce qu'on veut avec, mais il n'est pas "spécialisé"
-Il traite les utilisateurs dans un registre.
-
-
-*/
-
-
-
-
-
 //=============================================================================
 // MainStructure : SimpleDecentralized
 //=============================================================================
 
 struct C_BaseChannel : public HToolkitChannel {
-    // General
     virtual void constructor(hArgs* args) override {
-        // Definir la liste des composants attendus
+        // Attempted components
+
         hVector<hString>*           AttemptedElements = args->get<hVector<hString>*>("attempted_elements", nullptr);
         hVector<HtkChannelPortal>*  AttemptedPortals = args->get<hVector<HtkChannelPortal>*>("attempted_portals", nullptr); 
         hString                     AttemptedType = args->get<hString>("attempted_type", "null");
@@ -52,25 +38,15 @@ struct C_BaseChannel : public HToolkitChannel {
         ///======================================================================================================================================================
         ///                 Parameter Name                                  Tag               Default Value         Description
         ///======================================================================================================================================================
-        this->SetParameter("cutting_limit",         args->get<hString>("cutting_limit",         "1024"));       // (si 1024, un buffer de 4096 octets donnera 4 transmissions de 1024)
-        this->SetParameter("segmentation_limit",    args->get<hString>("segmentation_limit",    "4"));          // Max transmission bounces
+        this->SetParameter("cutting_limit",         args->get<hString>("cutting_limit",         "1024")); 
+        this->SetParameter("segmentation_limit",    args->get<hString>("segmentation_limit",    "4")); 
         this->SetParameter("initiator",             args->get<hString>("initiator",             "null"));    
         this->SetParameter("max_elements",          args->get<hString>("max_elements",          "1024"));      
         ///======================================================================================================================================================
 
-        // Encoding method
-
-
-        // Define portals
-
-        // Add custom events
-    
-        // Construct portal(s)
-        // Preparing the contruction of channels & elements
         this->OnCustomEvent("OnConstructed", args);
     };
 
-    // Self
     virtual void init(hArgs* args) override {
         // Properties
         ///======================================================================================================================================================
@@ -81,13 +57,12 @@ struct C_BaseChannel : public HToolkitChannel {
         ///======================================================================================================================================================
 
         // Parameters
-        // Note : La valeur par défaut peut être définie ici pour un channel pragmatique, sinon, mettre tout les champs attendus sous unknow
         ///======================================================================================================================================================
         ///                 Parameter Name                                  Tag               Default Value         Description
         ///======================================================================================================================================================
-        this->SetParameter("cutting_limit",         args->get<hString>("cutting_limit",         "unknow"));       // (si 1024, un buffer de 4096 octets donnera 4 transmissions de 1024)
-        this->SetParameter("segmentation_limit",    args->get<hString>("segmentation_limit",    "unknow"));          // Max transmission bounces
-        this->SetParameter("max_elements",          args->get<hString>("max_elements",          "unknow"));       // Max transmission bounces
+        this->SetParameter("cutting_limit",         args->get<hString>("cutting_limit",         "unknow"));      
+        this->SetParameter("segmentation_limit",    args->get<hString>("segmentation_limit",    "unknow"));    
+        this->SetParameter("max_elements",          args->get<hString>("max_elements",          "unknow"));  
         ///======================================================================================================================================================
     };
 
@@ -111,33 +86,25 @@ struct C_BaseChannel : public HToolkitChannel {
         hString total_sequences = transmission->GetParameter("total_sequences");
         hString current_sequence = transmission->GetParameter("current_sequence");
 
-        // Si séquencé, transmettre :
-        if(std::atoi(total_sequences.c_str()) > 0){ // 0 cut = 1 buffer, 1 cut = 2 buffers, 2 cut = 3 buffers, etc...
-            // transmttre
+        if(std::atoi(total_sequences.c_str()) > 0){ 
             //this->SendTransmission()
             this->OnCustomEvent("OnTransmitted", args);
             return;
         }
 
-        // Si encodé, décoder :*
         if(encoded == "true"){
 
         }
 
-        // Si découpé, reformer :
-        if(std::atoi(total_cuts.c_str()) == 0){ // 0 cut = 1 buffer, 1 cut = 2 buffers, 2 cut = 3 buffers, etc...
-            // Créer un transmission directe
+        if(std::atoi(total_cuts.c_str()) == 0){ 
 
             // HToolkit::BufferToType(transmission.buffer, channel.type)
             this->OnCustomEvent("OnReceive", args);
             return;
         }
         else{
-            // créer une transmission tracée (avec l'api)
-            // Et implementer la première séquance du buffer (avec l'api)
         }
 
-        // Si le découpage et le sequancage terminé, reconstituer le type
 
         if(total_cuts == current_cut){
             // hString final buffer
@@ -152,11 +119,6 @@ struct C_BaseChannel : public HToolkitChannel {
             this->OnCustomEvent("OnReceive", args);
             return;
         }
-
-        // Traiter le type.
-        
-        // (Reconstitution de la communication a partir des configurations du channel)
-
     };
 
     virtual void send(hArgs* args) override {
@@ -176,11 +138,10 @@ struct C_BaseChannel : public HToolkitChannel {
 
 };
 
-// Register event for matrix, in a construction, on récupère les events et on les attache
 CHANNEL_CUSTOM_EVENT(HSTD, OnReceive, C_BaseChannel, {
 
 })
-// Register event for matrix, in a construction, on récupère les events et on les attache
+
 CHANNEL_CUSTOM_EVENT(HSTD, OnAskToJoin, C_BaseChannel, {
     HToolkitChannel* channel    = args->get<HToolkitChannel*>("channel", nullptr);
     HToolkitMatrix* matrix      = args->get<HToolkitMatrix*>("matrix", nullptr);
@@ -197,10 +158,6 @@ CHANNEL_CUSTOM_EVENT(HSTD, OnAskToJoin, C_BaseChannel, {
             HToolkit::UpdateChannelElementsList(&update_args);
         }
     }
-
-    // Récupérer l'element au près de la matrice.
-    // Valider (bon type, bonnes configs...)
-    // Envoyer la decision
 })
 
 CHANNEL_CUSTOM_EVENT(HSTD, OnNewElement, C_BaseChannel, {
