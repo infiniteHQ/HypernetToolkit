@@ -1,5 +1,6 @@
-The custom communication
-----
+# The custom communication
+
+## Introduction
 
 ### What is Custom Communication?
 
@@ -21,4 +22,5 @@ While communication and its transmission are entirely customizable based on the 
 - **Communication Identifier (<span style="color:#FF3156"> **c:**</span> ):** This identifier serves as a straightforward way to differentiate between types of communication. In simple terms, if it's "n," it indicates a notification; if it's "t," it signifies a transmission, and if it's "c," it denotes a custom communication.
 
 - **Buffer (<span style="color:#F64FFA">[buffer]**</span>): The buffer in Hypernet is composed of raw data prepared for distribution.
+
 

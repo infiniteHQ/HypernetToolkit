@@ -1,6 +1,6 @@
+# Channels
 
-Channels
-====
+## Introduction
 
 ### What is a Channel?
 
@@ -25,3 +25,9 @@ We can also envision a regulatory authority within the matrix to secure access t
 Similar to all other components within Hypernet, a channel is programmable and modular, allowing for the adaptation of the nature of the data to be transmitted (such as sensor data, audio or video streams, environmental events, or files, for example). Additionally, it is possible to program the encryption method to be used, the security infrastructure to employ, or the manner in which connections are managed.
 
 This flexibility ensures that the channel can be customized to meet specific requirements, accommodating a diverse range of data types and security considerations based on the unique needs of the application or system. The programmability and modularity of Hypernet's channels contribute to the adaptability and versatility of the overall network architecture.
+
+## Hypernet Standard Library Definitions
+
+The theory provides crucial information about the modular functioning of channels. Now, let's explore more practically how Hypernet's standard library implements this theory. To implement everything we have seen and will see, refer to the documentation and tutorials of the Hypernet Toolkit.
+
+Comming soon :)

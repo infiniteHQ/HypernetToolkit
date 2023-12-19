@@ -1,5 +1,6 @@
-The notification
-----
+# The notification
+
+## Introduction
 
 ### What is a notification ?
 
@@ -57,8 +58,10 @@ IMPORTANT: *While the buffer exists, it is not advisable to use this field to tr
 
 
 
-### Understanding Notifications
+## Hypernet Standard Library Definitions
+The theory provides crucial information about the modular functioning of notitifications. Now, let's explore more practically how Hypernet's standard library implements this theory. To implement everything we have seen and will see, refer to the documentation and tutorials of the Hypernet Toolkit.
 
+#### Basic notifications
 Now that we've explored how a notification is structured, let's proceed to list the standard notifications. (Note that you can implement your elements and matrices with new notifications that you create.)
 
 ----

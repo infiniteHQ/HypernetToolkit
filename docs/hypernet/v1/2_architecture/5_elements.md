@@ -1,5 +1,6 @@
-Elements
-----
+# Elements
+
+## Introduction
 
 ### What is an Element?
 
@@ -26,3 +27,8 @@ In the Hypernet ecosystem, Elements represent individual points or entities with
 
 For example, envision a scenario where various Elements, such as applications, users, bots, or machines, are interconnected through nodes. These nodes serve as the underlying infrastructure that enables the establishment of communication channels. Consequently, this interconnected network of Elements and Nodes forms the foundation for dynamic and adaptable communication within the Hypernet matrix.
 
+## Hypernet Standard Library Definitions
+
+The theory provides crucial information about the modular functioning of elements. Now, let's explore more practically how Hypernet's standard library implements this theory. To implement everything we have seen and will see, refer to the documentation and tutorials of the Hypernet Toolkit.
+
+Comming soon :)

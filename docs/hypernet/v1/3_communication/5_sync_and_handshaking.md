@@ -1,13 +1,20 @@
-Handshaking
-----
+# Handshaking
+
+## Introduction
 
 ### Goal?
-Le but d'un handshaking maitrisé et de permetre aux elements de fonctionner entre eux malgrè des differences de technologie, de fonctionnement ou d'interpretation. C'est la clé de la fédération des services entre eux. Le handshaking permet aux element de s'accorder sur les methodes de sécurité a adopter et appliquer, le formatage des transmissions, les technologies a priviléger et autre...
+The goal of a controlled handshaking is to enable elements to work together despite differences in technology, operation, or interpretation. It is the key to federating services among themselves. Handshaking allows elements to agree on security methods to adopt and apply, the formatting of transmissions, the technologies to prioritize, and more.
 
 
-### Syncronization of contents & props
-Selon sa programmation les elements d'une matrice ont plusieurs moyens de se syncronyser entre eux, selon le compromis
 
-### Syncronization of parameters
 
-### Handshaking 
+## Hypernet Standard Library Definitions
+The theory provides crucial information about the modular functioning of handshaking & syncronization. Now, let's explore more practically how Hypernet's standard library implements this theory. To implement everything we have seen and will see, refer to the documentation and tutorials of the Hypernet Toolkit.
+
+Comming soon :)
+
+#### Syncronization of contents & props
+
+#### Syncronization of parameters
+
+#### Handshaking 

@@ -1,7 +1,6 @@
-Before continue...
-=====
+# Before continue...
 
-### Introduction
+## Introduction
 
 Hypernet aims to be a fully flexible and programmable technology designed for adaptability in any situation. Its protocols are entirely flexible, offering versatility to be tailored for any domain. Therefore, Hypernet can be utilized for raw data management, sensor data retrieval, or authentication and user management. In essence, Hypernet can be adapted to any use case, showcasing an innovative capacity for adaptability.
 
@@ -14,8 +13,8 @@ As stated in the introduction, Hypernet's paradigm differs from traditional netw
 
 The primary goal is to provide significant programming potential. The theories and practices have been developed around the aspect of modularization, allowing the choice of transmission protocol, network layer, and technology employed. Additionally, programming is a key feature, providing the ability to fully program network behaviors. Finally, the flexibility allows for easy adaptation of infrastructure or applications to specific needs.
 
-### About existing infras ?
-Nous partons du principe 
+### About Existing Infrastructures
+We operate under the principle that it is not the responsibility of existing infrastructure to adapt to Hypernet, but rather Hypernet should adapt to existing infrastructures. This is one of the reasons that led us to "modularize" Hypernet, providing the possibility to choose the transmission protocol and each component of the final Hypernet application.
 
 ### Communication
 Hypernet communications are programmable, allowing them to be tailored for data transmission. This can be achieved in various formats such as temperature, pressure, speed, or audio and video streams. They can be programmed to be interpreted in a specific manner, fully adapting to the application they serve (refer to the entire communication section).

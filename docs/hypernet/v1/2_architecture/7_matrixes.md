@@ -1,7 +1,6 @@
+# Matrixes
 
-
-Matrixes
-=====
+## Introduction
 
 ### What is a Matrix ?
 The matrix is an environment, a context for all elements, actors, channels, and components within a network based on Hypernet. It enables the swift and easy establishment of a comprehensive framework, allowing everyone to align on functionality, security, and communication. The matrix provides all relevant information and serves as the foundation for every communication channel. It furnishes the targeting system (directing the flow of communication), as well as element addressing and channel assignment.
@@ -40,13 +39,18 @@ Here is an example of a matrix:
     "r" defines the list of receivers (in this case, a machine reachable via TCP/IP at the address 127.0.0.122:1115).
 
 
-### Matrix coherence
+## Hypernet Standard Library Definitions
 
+The theory provides crucial information about the modular functioning of matrices. Now, let's explore more practically how Hypernet's standard library implements this theory. To implement everything we have seen and will see, refer to the documentation and tutorials of the Hypernet Toolkit.
+
+Comming soon :)
+
+
+#### Matrix I/O
 #### Matrix properties
 #### Matrix parameters
 #### Matrix contents
 #### Casting
-
-
-### Channel runtime
+#### Matrix coherence
+#### Channel runtime
 

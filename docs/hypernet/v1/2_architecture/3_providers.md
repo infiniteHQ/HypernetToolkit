@@ -1,5 +1,6 @@
-Providers
-----
+# Providers
+
+## Introduction
 
 ### What is a Provider?
 
@@ -25,3 +26,14 @@ Consider the scenario described:
 - Element C: Equipped with a Bluetooth provider.
 
 Because Element A and Element C share a common communication protocol (Bluetooth), they can directly communicate without the need for intermediaries or complex implementations. This illustrates the benefit of interoperability facilitated by providers within the Hypernet framework. Elements with compatible providers can seamlessly interact, fostering a more flexible and adaptable network.
+
+
+## Hypernet Standard Library Definitions
+
+The theory provides crucial information about the modular functioning of providers. Now, let's explore more practically how Hypernet's standard library implements this theory. To implement everything we have seen and will see, refer to the documentation and tutorials of the Hypernet Toolkit.
+
+Comming soon :)
+
+#### Implementation of a "provider"
+#### Creating a "provider"
+#### "Providers" provided by HypernetToolkit

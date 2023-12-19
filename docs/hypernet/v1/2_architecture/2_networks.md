@@ -1,6 +1,4 @@
-
-Network
-----
+# Network
 
 ### Definition of a network
 A network is simply an aggregation of devices capable of communicating directly with each other using a transmission protocol (such as TCP/IP, QUIC, LoRa, or Bluetooth). In essence, it establishes a structured environment where connected devices can exchange information seamlessly. Networks play a fundamental role in enabling communication and collaboration among devices, facilitating the flow of data and fostering interconnectedness in various technological domains.

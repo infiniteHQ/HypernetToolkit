@@ -1,7 +1,6 @@
-The transmission
-=====
+# The transmission
 
-----
+## Introduction
 
 ### What is a Transmission?
 
@@ -35,7 +34,15 @@ La transmission est composée
 
 - **Element Identifier (<span style="color:#4F89FA">::elementIdentifier**</span>): The ::elementIdentifier is a crucial component in Hypernet's communication, serving as a unique label for identifying the origin of a transmission. Much like a signature or address, it distinguishes one transmitting entity from another, providing clarity on the responsible element. This identifier is programmable, allowing users to customize it for sensors, data sources, or other elements. Its uniqueness aids in effective tracking, becoming a fundamental part of transmission metadata. In summary, ::elementIdentifier enhances traceability and accountability in Hypernet, attributing each communication event to the specific responsible element within its programmable framework.
 
+
 - **Parameters (<span style="color:#FAA14F">(parameters)**</span>): Parameters are used to fine-tune transmissions in Hypernet by specifying essential details like packet identifiers for segmentation, section numbers within channels, or other formatting specifics. These customizable attributes accompany each transmission, allowing users to tailor the communication to specific needs. In essence, parameters provide a dynamic toolkit for adjusting and enhancing the behavior of transmissions within the programmable framework of Hypernet.
+
 
 - **Buffer (<span style="color:#F64FFA">[buffer]**</span>): The buffer in Hypernet consists of raw data ready for distribution.
 
+
+## Hypernet Standard Library Definitions
+
+The theory provides crucial information about the modular functioning of transmissions. Now, let's explore more practically how Hypernet's standard library implements this theory. To implement everything we have seen and will see, refer to the documentation and tutorials of the Hypernet Toolkit.
+
+Comming soon :)

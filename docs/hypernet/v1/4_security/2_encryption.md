@@ -1,6 +1,7 @@
-Encryption
-----
+# Encryption
 *Note: The specification of the Hypernet Security Protocol is still a work in progress; contents are subject to changes.*
+
+## Introduction
 
 ### Why?
 Encrypting data and transmissions is fundamental to ensure a secure context for the user, their data, and the services they utilize.
@@ -13,3 +14,9 @@ There are several methods to establish encryption for communications, and Hypern
 
 ### Encryption of Data
 During the processing, storage, transmission, or reception of data, Hypernet enables secure encryption of the data to prevent compromise in the event of theft, loss, or malicious attempts.
+
+## Hypernet Standard Library Definitions
+
+The theory provides crucial information about the modular functioning of encryption. Now, let's explore more practically how Hypernet's standard library implements this theory. To implement everything we have seen and will see, refer to the documentation and tutorials of the Hypernet Toolkit.
+
+Comming soon :)

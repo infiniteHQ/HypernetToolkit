@@ -1,6 +1,3 @@
-User managment
-=====
+## User managment concepts with Hypernet
 
-----
-
-### Authentification with Hypernet
+Comming soon :)

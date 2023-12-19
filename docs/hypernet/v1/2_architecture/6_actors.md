@@ -1,5 +1,6 @@
-Actors
-----
+# Actors
+
+## Introduction
 
 ### What is an Actor?
 
@@ -15,3 +16,9 @@ In the context of Hypernet, an Actor is a dynamic and actively participating ele
 - AI: Artificial intelligence entities that actively contribute to data analysis, decision-making, or learning processes within the network are recognized as Actors.
 
 Actors distinguish themselves by their direct impact on the network's dynamics. They initiate actions, contribute to the exchange of information, and play an active role in shaping the overall behavior of the Hypernet matrix.
+
+## Hypernet Standard Library Definitions
+
+The theory provides crucial information about the modular functioning of actors. Now, let's explore more practically how Hypernet's standard library implements this theory. To implement everything we have seen and will see, refer to the documentation and tutorials of the Hypernet Toolkit.
+
+Comming soon :)
