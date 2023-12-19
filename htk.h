@@ -111,7 +111,7 @@
 #define HTK_ARRAYSIZE(_ARR)          ((int)(sizeof(_ARR) / sizeof(*(_ARR))))     // Size of a static C-style array. Don't use on pointers!
 #define HTK_UNUSED(_VAR)             ((void)(_VAR))                              // Used to silence "unused variable warnings". Often useful as asserts may be stripped out from final builds.
 #define HTK_OFFSETOF(_TYPE,_MEMBER)  offsetof(_TYPE, _MEMBER)                    // Offset of _MEMBER within _TYPE. Standardized as offsetof() in C++11
-#define HTOOLKIT_GETVERSION()        // Version
+#define HTK_CHECKVERSION()           HToolkit::DebugCheckVersionAndDataLayout(HTOOLKIT_VERSION) // Version
 
 
 // Disable some of MSVC most aggressive Debug runtime checks in function header/footer (used in some simple/low-level functions)
@@ -305,6 +305,8 @@ namespace HToolkit
     HTOOLKIT_API hMap<hString, HToolkitProvider*> GetProviders();
     HTOOLKIT_API void             RegisterProvider(HToolkitProvider* providers_ptr);
     #define                     ADD_PROVIDER(provider) HToolkit::RegisterProvider(provider)
+
+    bool DebugCheckVersionAndDataLayout(const char* version);
 
 
     // Memory Allocators

@@ -1622,6 +1622,13 @@ hString hRandom::Generate6CharID() {
 }
 
 
+bool HToolkit::DebugCheckVersionAndDataLayout(const char* version)
+{
+    bool error = false;
+    if (strcmp(version, HTOOLKIT_VERSION) != 0) { error = true; HTK_ASSERT(strcmp(version, HTOOLKIT_VERSION) == 0 && "Mismatched version string!"); }
+    return !error;
+}
+
 //==================================================================================================================
 // Internals Hypernet features
 //=================================================================================================================
