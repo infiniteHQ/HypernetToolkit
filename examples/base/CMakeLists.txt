@@ -4,5 +4,5 @@ project(base)
 
 add_executable(base
     ${CMAKE_CURRENT_SOURCE_DIR}/../../htk.cpp
-	base.cpp
+	main.cpp
 )

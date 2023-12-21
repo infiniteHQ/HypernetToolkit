@@ -8,14 +8,15 @@ namespace hstd {
 namespace Elements {
 
 //=============================================================================
-// Element : E_BaseElement
+// Element : E_Base
 //=============================================================================
 
-struct E_BaseElement : public HToolkitElement {
+struct E_Base : public HToolkitElement {
     virtual void bootstrapp(hArgs* args) override {
         HTK_LOG("Add to runtime");
     }
 
+    // Matrixes can construct elements with this function
     virtual void constructor(hArgs* args) override {
         HTK_LOG("Construct element");
         this->id = hRandom::Generate6CharID();
@@ -28,7 +29,7 @@ struct E_BaseElement : public HToolkitElement {
 };
 
 //=============================================================================
-ADD_ELEMENT_TO_FACTORY(HSTD, E_BaseElement);
+ADD_ELEMENT_TO_FACTORY(HSTD, E_Base);
 //=============================================================================
 
 

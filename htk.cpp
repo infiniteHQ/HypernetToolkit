@@ -589,6 +589,11 @@ HTOOLKIT_API HToolkitMatrix* HToolkit::CreateMatrix(hString matrixtype, hString 
       }
       
       HToolkitElement* element = ElementFactory::getInstance().createInstance(elementtype.c_str());
+
+
+      HToolkitElement* instanceelement = args->get<HToolkitElement*>("instance" + elementtype, nullptr);
+      instanceelement = element; 
+
       element->tag = elementtype;
       element->attached_matrix = matrix;
       element->interface = *ctx.IO.GetAllActiveReceivers()[0];

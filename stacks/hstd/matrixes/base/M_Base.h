@@ -20,7 +20,7 @@ namespace HToolkit
       //=============================================================================
       // MainStructure : SingleMatrix
       //=============================================================================
-      struct M_BaseMatrix : public HToolkitMatrix
+      struct M_Base : public HToolkitMatrix
       {
         // Base
         virtual void constructor(hArgs *args) override
@@ -93,7 +93,7 @@ namespace HToolkit
           this->OnCustomEvent("OnInitialized", args);
         }
 
-        virtual void constructor_channel(hArgs *args) override
+        virtual HToolkitChannel* constructor_channel(hArgs *args) override
         {
           if (args->get<hString>("mode", "null") == "static")
           {
@@ -101,7 +101,8 @@ namespace HToolkit
             hString channelTag = args->get<hString>("tag", "null");
             hString distantElement = args->get<hString>("element", "null");
 
-            this->add_registered_channel(this->CreateChannel(channelTag, args));
+            HToolkitChannel* channel = this->CreateChannel(channelTag, args);
+            this->add_registered_channel(channel);
             this->OnCustomEvent("OnChannelContructed", args);
 
             for(auto element : this->loaded_elements){
@@ -111,7 +112,9 @@ namespace HToolkit
               channelUpdate.add("matrix", matrix);
               HToolkit::UpdateMatrixChannelsList(&channelUpdate);
             }
+            return channel;
           }
+          return nullptr;
         }
 
         virtual void init_channel(hArgs *args) override
@@ -192,7 +195,7 @@ namespace HToolkit
       //=============================================================================
 
       // Register event for matrix, in a construction, on récupère les events et on les attache
-      MATRIX_CUSTOM_EVENT(HSTD, OnNewElement, M_BaseMatrix, {
+      MATRIX_CUSTOM_EVENT(HSTD, OnNewElement, M_Base, {
         HtkContext &ctx = *CHToolkit;
         HToolkitMatrix *matrix = args->get<HToolkitMatrix *>("matrix", nullptr);
         HToolkitElement *element = args->get<HToolkitElement *>("element", nullptr);
@@ -217,13 +220,13 @@ namespace HToolkit
       })
 
       // Register event for matrix, in a construction, on récupère les events et on les attache
-      MATRIX_CUSTOM_EVENT(HSTD, OnNewElementList, M_BaseMatrix, {
+      MATRIX_CUSTOM_EVENT(HSTD, OnNewElementList, M_Base, {
         HToolkitMatrix *matrix = args->get<HToolkitMatrix *>("matrix", nullptr);
         matrix->clear_registered_element(args);
       })
 
       // Register event for matrix, in a construction, on récupère les events et on les attache
-      MATRIX_CUSTOM_EVENT(HSTD, OnAskToUpdate, M_BaseMatrix, {
+      MATRIX_CUSTOM_EVENT(HSTD, OnAskToUpdate, M_Base, {
         HtkContext &ctx = *CHToolkit;
         HToolkitNotification *notification = args->get<HToolkitNotification *>("notification", nullptr);
         hString mid = notification->GetParameter("mid");
@@ -232,7 +235,7 @@ namespace HToolkit
       })
 
       // Register event for matrix, in a construction, on récupère les events et on les attache
-      MATRIX_CUSTOM_EVENT(HSTD, OnNewNode, M_BaseMatrix, {
+      MATRIX_CUSTOM_EVENT(HSTD, OnNewNode, M_Base, {
         HtkContext &ctx = *CHToolkit;
         HToolkitMatrix *matrix = args->get<HToolkitMatrix *>("matrix", nullptr);
         HToolkitElement *b_element = args->get<HToolkitElement *>("b_element", nullptr);
@@ -249,7 +252,7 @@ namespace HToolkit
       })
 
       // Register event for matrix, in a construction, on récupère les events et on les attache
-      MATRIX_CUSTOM_EVENT(HSTD, OnAskToJoin, M_BaseMatrix, {
+      MATRIX_CUSTOM_EVENT(HSTD, OnAskToJoin, M_Base, {
         HtkContext &ctx = *CHToolkit;
         HToolkitNotification *notification = args->get<HToolkitNotification *>("notification", nullptr);
         hString mid = notification->GetParameter("mid");
@@ -305,13 +308,13 @@ namespace HToolkit
       })
 
       // Register event for matrix, in a construction, on récupère les events et on les attache
-      MATRIX_CUSTOM_EVENT(HSTD, OnJoined, M_BaseMatrix, {
+      MATRIX_CUSTOM_EVENT(HSTD, OnJoined, M_Base, {
         hString eid = args->get<hString>("eid", "null"); // Pour s'auto attribuer
         hString mid = args->get<hString>("mid", "null");
       })
 
       //=============================================================================
-      ADD_MATRIX_TO_FACTORY(HSTD, M_BaseMatrix);
+      ADD_MATRIX_TO_FACTORY(HSTD, M_Base);
       //=============================================================================
 
     }; // namespace HToolkit

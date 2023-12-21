@@ -9,8 +9,6 @@
 #include <chrono>
 #include <thread>
 
-#include "../../../../stacks/hstd/types/primitives/T_String.h"
-
 namespace HToolkit {
 namespace hstd {
 namespace Channels {
@@ -19,7 +17,7 @@ namespace Channels {
 // MainStructure : SimpleDecentralized
 //=============================================================================
 
-struct C_BaseChannel : public HToolkitChannel {
+struct C_Base : public HToolkitChannel {
     virtual void constructor(hArgs* args) override {
         // Attempted components
 
@@ -138,11 +136,11 @@ struct C_BaseChannel : public HToolkitChannel {
 
 };
 
-CHANNEL_CUSTOM_EVENT(HSTD, OnReceive, C_BaseChannel, {
+CHANNEL_CUSTOM_EVENT(HSTD, OnReceive, C_Base, {
 
 })
 
-CHANNEL_CUSTOM_EVENT(HSTD, OnAskToJoin, C_BaseChannel, {
+CHANNEL_CUSTOM_EVENT(HSTD, OnAskToJoin, C_Base, {
     HToolkitChannel* channel    = args->get<HToolkitChannel*>("channel", nullptr);
     HToolkitMatrix* matrix      = args->get<HToolkitMatrix*>("matrix", nullptr);
     hString eid                 = args->get<hString>("eid", "null");
@@ -160,7 +158,7 @@ CHANNEL_CUSTOM_EVENT(HSTD, OnAskToJoin, C_BaseChannel, {
     }
 })
 
-CHANNEL_CUSTOM_EVENT(HSTD, OnNewElement, C_BaseChannel, {
+CHANNEL_CUSTOM_EVENT(HSTD, OnNewElement, C_Base, {
         HtkContext &ctx = *CHToolkit;
         hString eid =               args->get<hString>("eid", "null");
         HToolkitChannel *channel =  args->get<HToolkitChannel *>("channel", nullptr);
@@ -175,7 +173,7 @@ CHANNEL_CUSTOM_EVENT(HSTD, OnNewElement, C_BaseChannel, {
 
 
 //=============================================================================
-ADD_CHANNEL_TO_FACTORY(HSTD, C_BaseChannel);
+ADD_CHANNEL_TO_FACTORY(HSTD, C_Base);
 //=============================================================================
 
 

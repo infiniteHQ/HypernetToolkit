@@ -480,11 +480,12 @@ struct hVector
     typedef value_type*         iterator;
     typedef const value_type*   const_iterator;
 
-    // Constructors, destructor
-    inline hVector()                                       { Size = Capacity = 0; Data = NULL; }
-    inline hVector(const hVector<T>& src)                 { Size = Capacity = 0; Data = NULL; operator=(src); }
-    inline hVector<T>& operator=(const hVector<T>& src)   { clear(); resize(src.Size); if (src.Data) memcpy(Data, src.Data, (size_t)Size * sizeof(T)); return *this; }
-    inline ~hVector()                                      { if (Data) HTK_FREE(Data); } // Important: does not destruct anything
+    // Constructors, destructor 
+    inline hVector(std::initializer_list<T> initList) : Size(0), Capacity(0), Data(nullptr) {reserve(initList.size());for (const T& value : initList) {new (&Data[Size++]) T(value);}}
+    inline hVector()                                        { Size = Capacity = 0; Data = NULL; }
+    inline hVector(const hVector<T>& src)                   { Size = Capacity = 0; Data = NULL; operator=(src); }
+    inline hVector<T>& operator=(const hVector<T>& src)     { clear(); resize(src.Size); if (src.Data) memcpy(Data, src.Data, (size_t)Size * sizeof(T)); return *this; }
+    inline ~hVector()                                       { if (Data) HTK_FREE(Data); } // Important: does not destruct anything
 
     inline void         clear()                             { if (Data) { Size = Capacity = 0; HTK_FREE(Data); Data = NULL; } }  // Important: does not destruct anything
     inline void         clear_delete()                      { for (int n = 0; n < Size; n++) IM_DELETE(Data[n]); clear(); }     // Important: never called automatically! always explicit.
@@ -1025,7 +1026,7 @@ struct HToolkitMatrix
     virtual void            destructor(hArgs* args) {};
     virtual void            init(hArgs* args) {HTK_LOG("Please implement init(args) function to initialize a new matrix.")};
 
-    virtual void            constructor_channel(hArgs* args) {};
+    virtual HToolkitChannel* constructor_channel(hArgs* args) {return nullptr;};
     virtual void            destructor_channel(hArgs* args) {};
     virtual void            init_channel(hArgs* args) {};
     virtual void            destruct_channel(hArgs* args) {};
@@ -1036,9 +1037,9 @@ struct HToolkitMatrix
     virtual void            destruct_element(hArgs* args) {};
 
     // Important : "registered" is not "loaded". A register can give to runtime a list of elements without load it.
-    virtual hVector<HToolkitElement*>   get_registered_element(hArgs* args) {};
-    virtual hVector<HToolkitChannel*>   get_registered_channels(hArgs* args) {};
-    virtual hVector<HToolkitNode*>      get_registered_nodes(hArgs* args) {};
+    virtual hVector<HToolkitElement*>   get_registered_element(hArgs* args) {hVector<HToolkitElement*> _def; return _def;};
+    virtual hVector<HToolkitChannel*>   get_registered_channels(hArgs* args) {hVector<HToolkitChannel*> _def; return _def;};
+    virtual hVector<HToolkitNode*>      get_registered_nodes(hArgs* args) {hVector<HToolkitNode*> _def; return _def;};
     virtual void            add_registered_element(HToolkitElement* element) {};
     virtual void            add_registered_channel(HToolkitChannel* channel) {};
     virtual void            add_registered_node(HToolkitNode* ndoe) {};
@@ -1138,6 +1139,13 @@ struct HToolkitElement{
     hString                tag = "null";
     hString                address;
     HtkProviderInterface   interface;
+
+    hMap<hString, hString> props;
+    hString                GetProp(hString prop){hString value; this->props.find(prop, value); return value;};
+    void                   SetProp(hString prop, hString value){this->props.insert(prop, value);};
+
+    // Custom props
+    // Custom events
 
     virtual void            constructor(hArgs* args) {};
     virtual void            init(hArgs* args) {};
@@ -1504,13 +1512,13 @@ public:
 
 
 #define MATRIX_CUSTOM_EVENT(modName, className, typeName, code) \
+    namespace { \
     struct className : public HToolkitCustomEvent { \
         void on(hArgs* args) override { \
             code \
         } \
         className(hString type){this->_type = type;} \
-    }; \ 
-    namespace { \
+        };\
         inline className* create_##className() { return new className("::"#modName"::"#typeName); } \
         struct className##Registrar { \
             className##Registrar() { \
@@ -1521,13 +1529,12 @@ public:
     }
 
 #define CHANNEL_CUSTOM_EVENT(modName, className, typeName, code) \
-    struct className : public HToolkitCustomEvent { \
+    namespace { struct className : public HToolkitCustomEvent { \
         void on(hArgs* args) override { \
             code \
         } \
         className(hString type){this->_type = type;} \
-    }; \ 
-    namespace { \
+        };\
         inline className* create_##className() { return new className("::"#modName"::"#typeName); } \
         struct className##Registrar { \
             className##Registrar() { \
