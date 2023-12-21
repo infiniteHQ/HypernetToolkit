@@ -278,7 +278,7 @@ HTOOLKIT_API void HToolkit::HandleChannelPortal(hArgs* args){
 HTOOLKIT_API void HToolkit::HandleReceiveData(const char *Data,
                                           HtkProviderInterface &interface) {
   HtkContext &ctx = *CHToolkit;
-  
+
   const char *separator = ":{";
 
   char input[strlen(Data) + 1];
@@ -590,13 +590,11 @@ HTOOLKIT_API HToolkitMatrix* HToolkit::CreateMatrix(hString matrixtype, hString 
       
       HToolkitElement* element = ElementFactory::getInstance().createInstance(elementtype.c_str());
 
-
-      HToolkitElement* instanceelement = args->get<HToolkitElement*>("instance" + elementtype, nullptr);
-      instanceelement = element; 
-
       element->tag = elementtype;
       element->attached_matrix = matrix;
       element->interface = *ctx.IO.GetAllActiveReceivers()[0];
+      element->constructor(args->get<hArgs*>("element_args", nullptr));
+
       ctx.IO.activeRuntimeElements.push_back(element);
 
       ctx.IO.AddActiveMatrix(matrix);
@@ -1670,7 +1668,7 @@ HTOOLKIT_API void HToolkit::AskToJoinMatrix(HToolkitMatrix* matrix){
     HtkContext &ctx = *CHToolkit;
     HToolkitNotification notification;
 
-    HtkProviderInterface interface = matrix->GetReceivers()[0]; // need a queue
+    HtkProviderInterface interface = matrix->GetReceivers()[0]; // TODO: need a queue
 
     notification.Configure("::ask", "JoinMatrix", "1", interface, true);
     notification.AddParameter("rec",(char *)interface_to_string(interface).c_str());
@@ -1678,9 +1676,9 @@ HTOOLKIT_API void HToolkit::AskToJoinMatrix(HToolkitMatrix* matrix){
 
     hString runtimeElements;
     bool firstpass = false;
-    for(auto ety : ctx.IO.activeRuntimeElements){
+    for(auto ety : ctx.IO.currentElementTypes){
       if(firstpass){runtimeElements += ",";}
-      runtimeElements += ety->tag;
+      runtimeElements += ety;
       firstpass = true;
     }
 

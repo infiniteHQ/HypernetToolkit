@@ -1152,8 +1152,9 @@ struct HToolkitElement{
     virtual void            bootstrapp(hArgs* args) {};
 
     // Relations
-    hVector<HToolkitChannel *> channels;
-    HToolkitMatrix *        attached_matrix;
+    hVector<HToolkitChannel *>  channels;
+    HToolkitMatrix *            attached_matrix;
+    hVector<HToolkitMatrix*>    attached_matrices;
 
     virtual void            OnUpdate(HToolkitNotification notification) {};
 };

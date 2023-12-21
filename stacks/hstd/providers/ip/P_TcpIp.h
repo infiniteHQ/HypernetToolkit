@@ -64,7 +64,7 @@ public:
 void TrySend(HtkProviderInterface& interface, const char* buffer) override {
     std::string DestinationIp = interface.GetInterfaceVariable("ip").c_str();
     int DestinationPort = std::atoi((char *)interface.GetInterfaceVariable("port").c_str());
-    char msg[1500];
+    char msg[2048];
     struct hostent *host = gethostbyname((char *)DestinationIp.c_str());
     sockaddr_in sendSockAddr;
     bzero((char *)&sendSockAddr, sizeof(sendSockAddr));
@@ -92,7 +92,7 @@ void TrySend(HtkProviderInterface& interface, const char* buffer) override {
 }
 
 void TryReceive() {
-    char msg[1024]; 
+    char msg[2048]; 
     int bytesRead = 0; 
 
     sockaddr_in servAddr;
@@ -193,13 +193,15 @@ void TryReceive() {
 //-----------------------------------------------------------------------------
 
   // IO : 
-  void Send(const char* data, HtkProviderInterface& interface) override {
+  virtual void Send(const char* data, HtkProviderInterface& interface) override {
+    HTK_LOG("Send something")
     this->TrySend(interface, data);
     this->DataSent += sizeof(data);
     this->onSent();
   }
 
-  void Receive(const char* data, HtkProviderInterface& interface) override {
+  virtual void Receive(const char* data, HtkProviderInterface& interface) override {
+    HTK_LOG("Receive : " << data); 
     this->onReceived();
     this->DataReceived += sizeof(data);
     HToolkit::HandleReceiveData(data, interface);

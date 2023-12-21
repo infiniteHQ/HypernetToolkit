@@ -554,6 +554,7 @@ struct HtkIO {
   hMap<hString, HToolkitChannel*>   registeredDefaultChannelInitiators;
   
   hVector<HToolkitElement *>        activeRuntimeElements;
+  hVector<hString>                  currentElementTypes;
   hVector<HToolkitProvider *>       activeProviders;
 
 private:
